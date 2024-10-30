@@ -1,0 +1,63 @@
+erDiagram
+    USERS ||--o{ RECEIPTS : "creates"
+    BRANDS ||--o{ RECEIPT_ITEMS : "appears_in"
+    RECEIPTS ||--|{ RECEIPT_ITEMS : "contains"
+    CPG ||--|{ BRANDS : "owns"
+    BRAND_CATEGORIES ||--|{ BRANDS : "categorizes"
+
+    USERS {
+        uuid user_id PK
+        string state
+        datetime created_date
+        datetime last_login
+        string role
+        boolean is_active
+    }
+
+    RECEIPTS {
+        uuid receipt_id PK
+        uuid user_id FK
+        integer bonus_points_earned
+        string bonus_points_reason
+        datetime create_date
+        datetime date_scanned
+        datetime finished_date
+        datetime modify_date
+        datetime points_awarded_date
+        integer points_earned
+        date purchase_date
+        integer purchased_item_count
+        string receipt_status
+        decimal total_spent
+    }
+
+    RECEIPT_ITEMS {
+        uuid receipt_item_id PK
+        uuid receipt_id FK
+        uuid brand_id FK
+        decimal final_price
+        integer quantity
+        string description
+        decimal unit_price
+    }
+
+    BRANDS {
+        uuid brand_id PK
+        uuid cpg_id FK
+        uuid category_id FK
+        string barcode
+        string brand_code
+        string name
+        boolean is_top_brand
+    }
+
+    CPG {
+        uuid cpg_id PK
+        string name
+    }
+
+    BRAND_CATEGORIES {
+        uuid category_id PK
+        string name
+        string category_code
+    }
